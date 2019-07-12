@@ -1,13 +1,10 @@
 import { axiosGet } from '../../axios';
-
+import { newUsers, editNewUserMessageList } from './actions';
 
 export const getUsersOperation = () => (
   () => (
     axiosGet('/users')
-      .then((res) => {
-        console.log('get user operation', res.data);
-        return res.data;
-      })
+      .then(res => res.data)
       .catch((error) => {
         console.log('error in axios', error);
       })
@@ -15,10 +12,14 @@ export const getUsersOperation = () => (
 );
 
 export const getChatsOperation = params => (
-  () => (
+  dispatch => (
     axiosGet('/conversations/findChats', params)
       .then((res) => {
-        console.log('get user operation', res.data);
+        console.log('in get chats', params);
+        if (params.newUser) {
+          console.log('new user found');
+          dispatch(newUsers(res.data));
+        }
         return res.data;
       })
       .catch((error) => {
@@ -28,10 +29,10 @@ export const getChatsOperation = params => (
 );
 
 export const findConversation = params => (
-  () => (
+  dispatch => (
     axiosGet('/conversations', params)
       .then((res) => {
-        console.log('start conversation', res);
+        dispatch(editNewUserMessageList(params));
         return res.data;
       })
       .catch((error) => {

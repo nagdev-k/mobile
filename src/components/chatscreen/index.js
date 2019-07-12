@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  View, TextInput, ScrollView, BackHandler,
+  View, TextInput, ScrollView,
 } from 'react-native';
 import { Button } from 'native-base';
 import PropTypes from 'prop-types';
@@ -43,19 +43,17 @@ class ChatScreen extends React.Component {
       messages.push(msg);
       this.setState({ messages: [...messages] });
     });
-    this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
-  }
-
-  componentWillUnmount() {
-    this.backHandler.remove();
   }
 
   submitChatMessage = () => {
     const { message } = this.state;
-    const { actions, conversationId, senderId } = this.props;
+    const {
+      actions, conversationId, senderId, recieverId,
+    } = this.props;
     const params = { message, conversationId, senderId };
     if (message !== '') {
       socket.emit('message', `${message}-${conversationId}${senderId}`);
+      socket.emit('newConversation', recieverId);
       actions.saveMessage(params)
         .then(() => {
           this.setState({ flag: true });
@@ -66,11 +64,6 @@ class ChatScreen extends React.Component {
 
   updateSize = (height) => {
     if (height < 150) this.setState({ height });
-  }
-
-  handleBackPress = () => {
-    Actions.home({ type: 'reset' });
-    return true;
   }
 
   render() {
@@ -133,6 +126,7 @@ ChatScreen.propTypes = {
   }).isRequired,
   conversationId: PropTypes.string.isRequired,
   senderId: PropTypes.string.isRequired,
+  recieverId: PropTypes.string.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({

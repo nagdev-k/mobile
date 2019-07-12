@@ -45,7 +45,7 @@ class CameraView extends PureComponent {
       senderId,
     };
     actions.uploadImage(params)
-      .then((res) => {
+      .then(() => {
         Actions.chatScreen({
           senderId, conversationId, reciever,
         });
@@ -97,7 +97,7 @@ class CameraView extends PureComponent {
           }}
         />
         <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'space-between' }}>
-          <TouchableOpacity onPress={() => this.setState(prev => ({ flash: !prev.backCamera }))} style={styles.capture}>
+          <TouchableOpacity onPress={() => this.setState(prev => ({ backCamera: !prev.backCamera }))} style={styles.capture}>
             <Ionicons name="md-reverse-camera" size={40} />
           </TouchableOpacity>
           <TouchableOpacity onPress={this.takePicture} style={styles.capture}>

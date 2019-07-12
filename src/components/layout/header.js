@@ -22,7 +22,6 @@ class HeaderView extends React.Component {
   }
 
   backPress= () => {
-    console.log(this.props.user);
     if (isEqual(Actions.currentScene, 'chatScreen')) {
       Actions.connectedUsers({ type: 'reset', username: this.props.user.username, _id: this.props.user._id });
     } else {

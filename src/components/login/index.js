@@ -36,7 +36,7 @@ class LoginScreen extends React.Component {
     actions.signInOperation(params)
       .then((res) => {
         if (isEqual(res[1], undefined)) {
-          Actions.connectedUsers(res, { type: 'reset' });
+          Actions.connectedUsers({ res, type: 'reset' });
         } else {
           Alert.alert(
             '',
@@ -47,7 +47,7 @@ class LoginScreen extends React.Component {
                 onPress: () => console.log('Cancel Pressed'),
                 style: 'cancel',
               },
-              { text: 'OK', onPress: () => Actions.connectedUsers(res[0], { type: 'reset' }) },
+              { text: 'OK', onPress: () => Actions.connectedUsers({ _id: res[0]._id, username: res[0].username, type: 'reset' }) },
             ],
             { cancelable: false },
           );

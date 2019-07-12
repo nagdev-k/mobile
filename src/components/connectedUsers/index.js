@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
+import socket from '../../constants/socket';
 import HeaderView from '../layout/header';
 import RenderChats from './renderChats';
 import { getChatsOperation, findConversation } from '../../state/availableusers/operations';
@@ -25,7 +26,18 @@ class ConnectedUsers extends React.Component {
   componentDidMount() {
     const { users } = this.state;
     const { actions, _id } = this.props;
-    actions.getChatsOperation({ senderId: _id })
+    socket.on('receiver', (recieverId) => {
+      if (!isEqual(_id, recieverId)) {
+        actions.getChatsOperation({ senderId: _id, newUser: true })
+          .then((res) => {
+            if (isEmpty(res)) {
+              this.setState({ isEmptyText: true });
+            }
+            this.setState({ users: [...users, ...res], isEmptyText: false });
+          });
+      }
+    });
+    actions.getChatsOperation({ senderId: _id, newUser: false })
       .then((res) => {
         if (isEmpty(res)) {
           this.setState({ isEmptyText: true });
@@ -37,13 +49,12 @@ class ConnectedUsers extends React.Component {
       });
   }
 
-
   startConversation = (recieverId, reciever) => {
     const { actions, _id } = this.props;
     actions.findConversation({ senderId: _id, recieverId })
       .then((res) => {
         Actions.chatScreen({
-          reciever, senderId: _id, conversationId: res[0]._id,
+          reciever, senderId: _id, conversationId: res[0]._id, recieverId,
         });
       });
   }
@@ -54,12 +65,12 @@ class ConnectedUsers extends React.Component {
   }
 
   renderItem = ({ item }) => {
-    const { username } = this.props;
+    const { username, newUserMessage } = this.props;
     if (isEqual(username, item.username)) {
       return null;
     }
     return (
-      <RenderChats item={item} startConversation={this.startConversation} />
+      <RenderChats item={item} isNew={newUserMessage.findIndex(e => e.username === item.username)} startConversation={this.startConversation} />
     );
   }
 
@@ -96,6 +107,7 @@ ConnectedUsers.propTypes = {
   }).isRequired,
   username: PropTypes.string.isRequired,
   _id: PropTypes.string.isRequired,
+  newUserMessage: PropTypes.instanceOf(Array).isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -106,4 +118,8 @@ const mapDispatchToProps = dispatch => ({
   }, dispatch),
 });
 
-export default connect(null, mapDispatchToProps)(ConnectedUsers);
+const mapStateToProps = state => ({
+  newUserMessage: state.newUserMessagReducer.newUserMessage,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ConnectedUsers);

@@ -32,7 +32,7 @@ class HeaderView extends React.Component {
   render() {
     const { isCardActive } = this.state;
     const {
-      user, title, back, hideAddUser,
+      user, title, back, hideAddUser, showLogout
     } = this.props;
     return (
       <View>
@@ -55,7 +55,13 @@ class HeaderView extends React.Component {
               />
             )}
             <Text>{'    '}</Text>
-            <Entypo name="dots-three-vertical" onPress={() => this.setState(prevState => ({ isCardActive: !prevState.isCardActive }))} style={styles.headerIcons} />
+            {showLogout && (
+              <Entypo
+                name="dots-three-vertical"
+                onPress={() => this.setState(prevState => ({ isCardActive: !prevState.isCardActive }))}
+                style={styles.headerIcons}
+              />
+            )}
           </View>
         </View>
         {
@@ -82,11 +88,13 @@ HeaderView.propTypes = {
   }).isRequired,
   back: PropTypes.bool,
   hideAddUser: PropTypes.bool,
+  showLogout: PropTypes.bool,
 };
 
 HeaderView.defaultProps = {
   back: false,
   hideAddUser: false,
+  showLogout: true,
 };
 
 const mapStateToProps = state => ({

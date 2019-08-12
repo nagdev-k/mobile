@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Image } from 'react-native';
 import { ListItem, Text } from 'native-base';
-import Foundation from 'react-native-vector-icons/Foundation';
 import { PropTypes } from 'prop-types';
 import {
   a, b, c, d, e, f, g, h, j, k, l, m, n, p, s, r, t, u, v, y, user,
@@ -58,13 +57,12 @@ class RenderChats extends React.Component {
   }
 
   render() {
-    const { item, startConversation, isNew } = this.props;
+    const { item, startConversation } = this.props;
     return (
       <ListItem style={{ borderBottomWidth: 0 }} onPress={() => startConversation(item._id, item.username)}>
         {this.userLogo(item.username[0].toLowerCase())}
         <View style={styles.username}>
           <Text style={{ fontWeight: 'bold', fontSize: 20, paddingBottom: 15 }}>{`  ${item.username}`}</Text>
-          {(isNew > -1) && <Foundation name="burst-new" size={25} style={{ color: 'green' }} />}
           <View style={{ width: '100%' }} />
         </View>
       </ListItem>
@@ -75,7 +73,6 @@ class RenderChats extends React.Component {
 RenderChats.propTypes = {
   startConversation: PropTypes.func.isRequired,
   item: PropTypes.instanceOf(Object).isRequired,
-  isNew: PropTypes.number.isRequired,
 };
 
 export default RenderChats;

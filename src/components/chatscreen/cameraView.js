@@ -13,6 +13,7 @@ import PropTypes from 'prop-types';
 import { isEmpty } from 'lodash';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import socket from '../../constants/socket';
 
 import { uploadImage } from '../../state/chatscreen/operations';
 import styles from './styles';
@@ -46,6 +47,7 @@ class CameraView extends PureComponent {
     };
     actions.uploadImage(params)
       .then(() => {
+        // socket.emit('message', `${res.message}-${conversationId}${senderId}`);
         Actions.chatScreen({
           senderId, conversationId, reciever,
         });

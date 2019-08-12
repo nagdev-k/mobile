@@ -48,12 +48,13 @@ class ChatScreen extends React.Component {
   submitChatMessage = () => {
     const { message } = this.state;
     const {
-      actions, conversationId, senderId, recieverId,
+      actions, conversationId, senderId,
+      // recieverId,
     } = this.props;
     const params = { message, conversationId, senderId };
     if (message !== '') {
       socket.emit('message', `${message}-${conversationId}${senderId}`);
-      socket.emit('newConversation', recieverId);
+      // socket.emit('newConversation', recieverId);
       actions.saveMessage(params)
         .then(() => {
           this.setState({ flag: true });
@@ -73,7 +74,7 @@ class ChatScreen extends React.Component {
     } = this.props;
     return (
       <View style={{ flex: 1, backgroundColor: 'white' }}>
-        <HeaderView back hideAddUser title={reciever} />
+        <HeaderView back hideAddUser title={reciever} showLogout={false} />
         <View style={styles.mainView}>
           <ScrollView
             style={styles.messageView}
@@ -126,7 +127,7 @@ ChatScreen.propTypes = {
   }).isRequired,
   conversationId: PropTypes.string.isRequired,
   senderId: PropTypes.string.isRequired,
-  recieverId: PropTypes.string.isRequired,
+  // recieverId: PropTypes.string.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({

@@ -151,6 +151,7 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-push-notification')
     implementation project(':rn-fetch-blob')
     implementation project(':react-native-image-crop-picker')
     implementation project(':react-native-camera')
@@ -167,3 +168,5 @@ task copyDownloadableDepsToLibs(type: Copy) {
     from configurations.compile
     into 'libs'
 }
+
+apply plugin: 'com.google.gms.google-services'

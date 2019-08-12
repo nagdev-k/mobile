@@ -6043,10 +6043,10 @@ react-native-camera@^2.11.0:
   dependencies:
     prop-types "^15.6.2"
 
-react-native-device-info@^2.2.2:
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-2.2.2.tgz#777388b8cff4594c8db2ea3a53f2f1f9e2c611a1"
-  integrity sha512-2b0TycUJbW/9T7L070L6q4+ce8guD4c0c8mWWjiVNuvCrZVf7VNomvNk1BqIVXcnYbZO43V0SVN6z1fvp2HTyg==
+react-native-device-info@2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-2.1.2.tgz#5c553498e8930410aa65796b83f8f8c8fb9893b4"
+  integrity sha512-q14hVR0eLRXnKeRyKX4naydXstCWetCIL+K+vUqREGkVj6qKoBouKd2yd8AxBfyomQN4uP3XRT6hTCwErIj9Ew==
 
 react-native-dismiss-keyboard@1.0.0:
   version "1.0.0"
@@ -6100,13 +6100,10 @@ react-native-keyboard-aware-scroll-view@0.8.0:
     prop-types "^15.6.2"
     react-native-iphone-x-helper "^1.0.3"
 
-react-native-notifications@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/react-native-notifications/-/react-native-notifications-2.0.0.tgz#11343e04757bd314cb3fc382d4b29fa79d5b0d93"
-  integrity sha512-a6x7OzquJ54OpcGghJipH8eOfdq0BuV0ZTpIl/YqIem9YaZ3nuvZ7cXapHhr9LezhJcw5hqqK6sCyFAwO1dJjQ==
-  dependencies:
-    core-js "^1.0.0"
-    uuid "^2.0.3"
+react-native-push-notification@3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-push-notification/-/react-native-push-notification-3.1.1.tgz#99ce426e78e95788c298f73750cc4e68db04d7ab"
+  integrity sha512-4+4yQXNPqh5IVvpSBmR4Cy/UeMjTcfE8KIJgEuT7pME97WK+aGPn6W3ybhOoXC1n+ZWKfrAlsHydLE4xfBZDJg==
 
 react-native-router-flux@^4.0.6:
   version "4.0.6"
@@ -7570,11 +7567,6 @@ uuid@3.2.1:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.2.1.tgz#12c528bb9d58d0b9265d9a2f6f0fe8be17ff1f14"
   integrity sha512-jZnMwlb9Iku/O3smGWvZhauCf6cvvpKi4BKRiliS3cxnI+Gz9j5MEpTz2UFuXiKPJocb7gnsLHwiS05ige5BEA==
-
-uuid@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/uuid/-/uuid-2.0.3.tgz#67e2e863797215530dff318e5bf9dcebfd47b21a"
-  integrity sha1-Z+LoY3lyFVMN/zGOW/nc6/1Hsho=
 
 uuid@^3.3.2:
   version "3.3.2"

@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  View, TextInput, ScrollView,
+  View, TextInput, ScrollView, Alert,
 } from 'react-native';
 import { Button } from 'native-base';
 import PropTypes from 'prop-types';
@@ -14,6 +14,7 @@ import { getMessages, saveMessage } from '../../state/chatscreen/operations';
 import socket from '../../constants/socket';
 import styles from './styles';
 import RenderMessages from './renderMessages';
+import NotifService from '../notifications/NotifService';
 
 class ChatScreen extends React.Component {
   constructor(props) {
@@ -26,11 +27,14 @@ class ChatScreen extends React.Component {
       height: 50,
       flag: false,
     };
+    this.notif = new NotifService(this.onRegister.bind(this), this.onNotif.bind(this));
   }
 
   componentDidMount() {
     const { messages } = this.state;
-    const { actions, conversationId } = this.props;
+    const {
+      actions, conversationId, senderId, reciever,
+    } = this.props;
     const params = { conversationId };
     actions.getMessages(params)
       .then((res) => {
@@ -41,6 +45,9 @@ class ChatScreen extends React.Component {
       });
     socket.on('new_message', (msg) => {
       messages.push(msg);
+      if (!msg.includes(senderId)) {
+        this.notif.localNotif(msg.substr(0, msg.lastIndexOf('-')), reciever);
+      }
       this.setState({ messages: [...messages] });
     });
   }
@@ -65,6 +72,16 @@ class ChatScreen extends React.Component {
 
   updateSize = (height) => {
     if (height < 150) this.setState({ height });
+  }
+
+  onRegister = (token) => {
+    Alert.alert("Registered !", JSON.stringify(token));
+    console.log(token);
+    this.setState({ registerToken: token.token, gcmRegistered: true });
+  }
+
+  onNotif = (notif) => {
+    console.log(notif);
   }
 
   render() {

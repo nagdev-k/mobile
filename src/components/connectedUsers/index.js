@@ -54,7 +54,7 @@ class ConnectedUsers extends React.Component {
     actions.findConversation({ senderId: _id, recieverId })
       .then((res) => {
         Actions.chatScreen({
-          reciever, senderId: _id, conversationId: res[0]._id, recieverId,
+          reciever, senderId: _id, conversationId: res[0]._id, recieverId
         });
       });
   }

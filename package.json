@@ -24,6 +24,7 @@
     "react-native-camera": "^2.11.0",
     "react-native-device-info": "2.1.2",
     "react-native-image-crop-picker": "^0.24.1",
+    "react-native-push-notification": "3.1.1",
     "react-native-router-flux": "^4.0.6",
     "react-native-vector-icons": "^6.5.0",
     "react-redux": "^7.0.3",

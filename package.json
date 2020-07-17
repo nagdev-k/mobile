@@ -16,7 +16,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.13.0",
     "firebase": "^5.11.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "native-base": "^2.12.1",
     "prop-types": "^15.7.2",
     "react": "16.8.3",
